@@ -7,7 +7,7 @@ export const environment = {
   channelId: 1055033,
   tiles: [{
     fieldId: 'field1',
-    fieldType: ''
+    tileType: ''
   }]
 };
 
