@@ -1,3 +1,7 @@
+// weight
+// temperature
+// humidity
+
 export const environment = {
   production: false,
   channelId: 1055033,
