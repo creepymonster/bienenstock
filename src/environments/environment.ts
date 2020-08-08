@@ -1,8 +1,17 @@
-// weight
-// temperature
-// humidity
+export type TileType = 'weight' | 'temperature' | 'humidity';
 
-export const environment = {
+export interface Tile {
+    fieldId: string;
+    tileType: TileType;
+}
+
+export interface Environment {
+  production: boolean;
+  channelId: number;
+  tiles: Array<Tile>;
+}
+
+export const environment: Environment = {
   production: false,
   channelId: 1055033,
   tiles: [{
