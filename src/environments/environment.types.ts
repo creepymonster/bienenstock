@@ -8,6 +8,6 @@ export interface TileSettings {
 
 export interface Environment {
   production: boolean;
-  channelId: number;
+  channelId: number | Array<number>;
   tiles: Array<TileSettings>;
 }
