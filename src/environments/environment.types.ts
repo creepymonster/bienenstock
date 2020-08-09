@@ -2,17 +2,12 @@ export type TileType = 'weight' | 'temperature' | 'humidity';
 
 export interface TileSettings {
     fieldId: string;
+    channelId?: number;
     tileType: TileType;
-}
-
-export interface MqttSettings {
-  server: string;
-  protocol: string;
-  port: number;
 }
 
 export interface Environment {
   production: boolean;
+  channelId: number;
   tiles: Array<TileSettings>;
-  mqtt: MqttSettings;
 }
