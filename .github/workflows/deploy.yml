@@ -20,4 +20,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
         npm install
-        npm run ng --deploy --base-href=/bienenstock/ --name="Reimar Metzen" --email="reimarmetzen@gmail.com" --no-silent
+        npm run ng -- deploy --base-href=/bienenstock/ --name="Reimar Metzen" --email="reimarmetzen@gmail.com" --no-silent
