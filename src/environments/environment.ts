@@ -1,19 +1,24 @@
 export type TileType = 'weight' | 'temperature' | 'humidity';
 
-export interface Tile {
+export interface TileSettings {
     fieldId: string;
     tileType: TileType;
 }
 
+export interface MqttSettings {
+  server: string;
+  protocol: string;
+  port: number;
+}
+
 export interface Environment {
   production: boolean;
-  channelId: number;
-  tiles: Array<Tile>;
+  tiles: Array<TileSettings>;
+  mqtt: MqttSettings;
 }
 
 export const environment: Environment = {
   production: false,
-  channelId: 1055033,
   tiles: [{
     fieldId: 'field1',
     tileType: ''
