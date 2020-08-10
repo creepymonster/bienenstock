@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Inject } from '@angular/core';
+
+import { Environment } from '@app/models/environment.model';
+import { ENV } from '@app/providers/environment.provider';
 
 import { ThingSpeakService } from './services';
 
@@ -10,21 +14,7 @@ import { ThingSpeakService } from './services';
 export class AppComponent {
   title = 'bienenstock';
 
-  constructor(private thingSpeakService: ThingSpeakService) {
-    this.thingSpeakService.getLastEntryInFieldFeed(1055033, 1).subscribe(value => {
-      console.log(value);
-    });
-
-    this.thingSpeakService.getChannelFeeds(1055033).subscribe(value => {
-      console.log(value);
-    });
-
-    this.thingSpeakService.getFieldFeed(1055033, 1).subscribe(value => {
-      console.log(value);
-    });
-
-    this.thingSpeakService.getLastEntryInChannelFeed(1055033).subscribe(value => {
-      console.log(value);
-    });
+  constructor(@Inject(ENV) private env: Environment, private thingSpeakService: ThingSpeakService) {
+    
   }
 }

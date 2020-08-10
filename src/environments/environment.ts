@@ -1,4 +1,4 @@
-import { Environment } from './environment.types';
+import { Environment } from '@app/models/environment.model';
 
 export const environment: Environment = {
   production: false,
