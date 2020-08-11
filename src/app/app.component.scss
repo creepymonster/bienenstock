@@ -21,15 +21,16 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
+  padding: 5px;
 }
 
 .grid-item {
-  height: 270px;
+  height: 265px;
   flex-basis: 20%;
   -ms-flex: auto;
   width: 259px;
   position: relative;
-  padding: 10px;
+  padding: 5px;
   box-sizing: border-box;
 }
 
