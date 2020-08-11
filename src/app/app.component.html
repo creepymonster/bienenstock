@@ -5,7 +5,7 @@
   </div>
 
   <div class="container">
-  <div class="grid-row"/>
+  <div class="grid-row">
     <ng-container *ngFor="let feed of channel.feeds">
       <div *ngIf="getSettings(channel.channelId, feed.field.fieldId) as settings" class="grid-item">
         <weight-view [feed]="feed" [settings]="settings" [locale]="getLocale()"></weight-view>
