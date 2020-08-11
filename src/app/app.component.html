@@ -4,12 +4,14 @@
     <auto-refresh [RefreshEveryMinutes]="1" (Refresh)="refreshChannel()"></auto-refresh>
   </div>
 
-  <div class="tiles">
+  <div class="container">
+  <div class="grid-row"/>
     <ng-container *ngFor="let feed of channel.feeds">
-      <div *ngIf="getSettings(channel.channelId, feed.field.fieldId) as settings" class="tile-item">
+      <div *ngIf="getSettings(channel.channelId, feed.field.fieldId) as settings" class="grid-item">
         <weight-view [feed]="feed" [settings]="settings" [locale]="getLocale()"></weight-view>
       </div>
     </ng-container>
+  </div>
   </div>
 </ng-container>
 
