@@ -1,3 +1,16 @@
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 50px;
+  box-sizing: border-box;
+  padding: 10px;
+
+  background-color: #9e9e9e;
+}
+
 .container {
   max-width: 1335px;
   margin: 0 auto;
