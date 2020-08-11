@@ -1,0 +1,24 @@
+.tiles {
+  display: grid;
+
+  margin: 5px;
+
+  grid-auto-flow: dense;
+  grid-auto-rows: calc(50vh - 5px);
+  grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+.timer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+}

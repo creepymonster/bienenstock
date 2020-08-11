@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { throwError, Observable } from 'rxjs';
 import { catchError, filter, map, retry } from 'rxjs/operators';
 
-import { ThingChannel, ThingFeeds, ThingField, ThingFieldEntry } from '../models';
+import { ThingChannel, ThingFeed, ThingFeeds, ThingField, ThingFieldEntry } from '@app/models';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +22,7 @@ export class ThingSpeakService {
         const feeds = this.mapFeeds(res.feeds, channel.channelFields);
 
         const ret: ThingChannel & ThingFeeds = Object.assign({}, channel, {
-          feeds: feeds
+          feeds: this.splitFeeds(channel.channelFields, feeds)
         });
 
         return ret;
@@ -39,7 +39,7 @@ export class ThingSpeakService {
         const feeds = this.mapFeeds(res.feeds, channel.channelFields.find(field => field.fieldId === fieldId));
 
         const ret: ThingChannel & ThingFeeds = Object.assign({}, channel, {
-          feeds: feeds
+          feeds: this.splitFeeds(channel.channelFields, feeds)
         });
 
         return ret;
@@ -47,7 +47,7 @@ export class ThingSpeakService {
     );
   }
 
-  getLastEntryInChannelFeed(channelId: number): Observable<Array<ThingFieldEntry>> { // https://api.thingspeak.com/channels/1055033/feed/last.json
+  getLastEntryInChannelFeed(channelId: number): Observable<ThingFieldEntry[]> { // https://api.thingspeak.com/channels/1055033/feed/last.json
     const url = `${this.THINGSPEAK_API_SERVER}/channels/${channelId}/feed/last.json`;
 
     return this.http.get(url).pipe(
@@ -99,7 +99,7 @@ export class ThingSpeakService {
     return ret;
   }
 
-  private mapFeeds(feedsRes: any, fields: Array<ThingField> | ThingField): Array<ThingField & ThingFieldEntry> {
+  private mapFeeds(feedsRes: any, fields: ThingField[] | ThingField): ThingFieldEntry[] {
     const ret = [];
 
     feedsRes.map((fieldEntry: any) => {
@@ -109,21 +109,21 @@ export class ThingSpeakService {
     return ret;
   }
 
-  private mapFeedsEntry(res: any, fields: Array<ThingField> | ThingField): Array<ThingField & ThingFieldEntry> {
+  private mapFeedsEntry(res: any, fields: ThingField[] | ThingField): ThingFieldEntry[] {
     const ret = [];
 
     if (Array.isArray(fields)) {
       fields.forEach(field => {
-        ret.push(Object.assign({}, field, this.mapFieldEntry(res, field.fieldId)));
+        ret.push(this.mapFieldEntry(res, field.fieldId));
       });
     } else {
-      ret.push(Object.assign({}, fields, this.mapFieldEntry(res, fields.fieldId)));
+      ret.push(this.mapFieldEntry(res, fields.fieldId));
     }
 
     return ret;
   }
 
-  private mapFieldEntries(fieldRes: any): Array<ThingFieldEntry> {
+  private mapFieldEntries(fieldRes: any): ThingFieldEntry[] {
     const fieldIds = Object.getOwnPropertyNames(fieldRes).filter(prop => prop.startsWith('field')).map(prop => this.getPropertyId(prop));
 
     return fieldIds.map(fieldId => {
@@ -140,5 +140,16 @@ export class ThingSpeakService {
     };
 
     return ret;
+  }
+
+  private splitFeeds(fields: ThingField[], feeds: ThingFieldEntry[]): ThingFeed[] {
+    return fields.map(field => {
+      const ret: ThingFeed = {
+        field: field,
+        entries: feeds.filter(e => e.fieldId === field.fieldId)
+      };
+
+      return ret;
+    });
   }
 }

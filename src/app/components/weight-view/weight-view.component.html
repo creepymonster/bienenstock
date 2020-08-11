@@ -1,0 +1,14 @@
+<div [ngStyle]="{'background-color': settings.backgroundColor, color: settings.foregroundColor}" class="view">
+  <div class="view--title">{{ feed.field.fieldName }}</div>
+
+  <ng-container *ngIf="lastEntry">
+    <div class="view--value">
+      {{ formatValue(lastEntry.entryValue) }}
+    </div>
+
+    <div class="view--created-at">
+      <span i18n>Stand:</span>
+      {{ formatCreatedAt(lastEntry.entryCreatedAt) }}
+    </div>
+  </ng-container>
+</div>

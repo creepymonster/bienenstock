@@ -14,6 +14,7 @@
     "tslint-angular"
   ],
   "rules": {
+    "array-type": [true, "array"],
     "defocus": true,
     "trailing-comma": [
       true,

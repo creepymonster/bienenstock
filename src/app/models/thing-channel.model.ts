@@ -3,7 +3,7 @@ import { ThingField } from './thing-field.model';
 export interface ThingChannel {
   channelCreatedAt: Date;
   channelDescription: string;
-  channelFields: Array<ThingField>;
+  channelFields: ThingField[];
   channelId: number;
   channelLastEntryId: number;
   channelLatitude: number;

@@ -1,1 +1,13 @@
-TEST
+<div *ngIf="channel$ | async as channel; else loading" class="tiles">
+  <ng-container *ngFor="let feed of channel.feeds">
+    <div *ngIf="getSettings(channel.channelId, feed.field.fieldId) as settings" class="tile-item">
+      <weight-view [feed]="feed" [settings]="settings" [locale]="getLocale()"></weight-view>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #loading>
+  <div class="loading">Loading...</div>
+</ng-template>
+
+<auto-refresh [RefreshEveryMinutes]="0.16" (Refresh)="refreshChannel()" class="timer"></auto-refresh>
