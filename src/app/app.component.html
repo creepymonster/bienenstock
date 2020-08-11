@@ -1,13 +1,19 @@
-<div *ngIf="channel$ | async as channel; else loading" class="tiles">
-  <ng-container *ngFor="let feed of channel.feeds">
-    <div *ngIf="getSettings(channel.channelId, feed.field.fieldId) as settings" class="tile-item">
-      <weight-view [feed]="feed" [settings]="settings" [locale]="getLocale()"></weight-view>
-    </div>
-  </ng-container>
-</div>
+<ng-container *ngIf="channel$ | async as channel; else loading" (click)="refreshChannel()">
+  <div class="title">
+    {{channel.channelName}}
+    <auto-refresh [RefreshEveryMinutes]="1" (Refresh)="refreshChannel()"></auto-refresh>
+  </div>
+
+  <div class="tiles">
+    <ng-container *ngFor="let feed of channel.feeds">
+      <div *ngIf="getSettings(channel.channelId, feed.field.fieldId) as settings" class="tile-item">
+        <weight-view [feed]="feed" [settings]="settings" [locale]="getLocale()"></weight-view>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>
 
 <ng-template #loading>
   <div class="loading">Loading...</div>
 </ng-template>
 
-<auto-refresh [RefreshEveryMinutes]="1" (Refresh)="refreshChannel()" class="timer"></auto-refresh>

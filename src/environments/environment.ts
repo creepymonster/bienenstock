@@ -23,13 +23,13 @@ export const environment: Environment = {
     tileType: 'weight',
     unit: 'kg'
   }, {
-    backgroundColor: '#FFC107',
+    backgroundColor: '#607D8B',
     fieldId: 4,
     foregroundColor: 'white',
     tileType: 'weight',
     unit: 'kg'
   }, {
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#2196F3',
     fieldId: 5,
     foregroundColor: 'white',
     tileType: 'weight',

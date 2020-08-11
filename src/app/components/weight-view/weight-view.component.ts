@@ -8,9 +8,9 @@ import { ThingFeed, ThingFieldEntry, TileSettings } from '@app/models';
   styleUrls: ['./weight-view.component.scss']
 })
 export class WeightViewComponent implements OnInit {
-  get firstEntry(): ThingFieldEntry {
-    if (this.feed.entries && this.feed.entries.length > 0) {
-      return this.feed.entries[0];
+  get prevEntry(): ThingFieldEntry {
+    if (this.feed.entries && this.feed.entries.length > 1) {
+      return this.feed.entries[this.feed.entries.length - 2];
     }
 
     return null;
@@ -37,7 +37,7 @@ export class WeightViewComponent implements OnInit {
   formatValue(value: string): string {
     const parsedValue = parseFloat(value);
     
-    return `${parsedValue.toLocaleString(this.locale, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${this.settings.unit}`;
+    return `${parsedValue.toLocaleString(this.locale, { minimumFractionDigits: 3, maximumFractionDigits: 3 })} ${this.settings.unit}`;
   }
 
   ngOnInit(): void {
