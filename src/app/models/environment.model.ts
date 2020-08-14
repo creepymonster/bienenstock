@@ -10,7 +10,7 @@ export interface TileSettings {
 }
 
 export interface Environment {
-  channelId: number | number[];
+  channelId: number[];
   locale: string;
   production: boolean;
   tiles: TileSettings[];

@@ -1,21 +1,37 @@
 <ng-container *ngIf="channel$ | async as channel; else loading" (click)="refreshChannel()">
-  <div class="title">
-    {{channel.channelName}}
-    <auto-refresh [RefreshEveryMinutes]="1" (Refresh)="refreshChannel()"></auto-refresh>
+  <div class="header">
+    <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAHqUlEQVR4Xu2bdYxdRRTGf8Xd3V2Cuwd39yDFipYCxd3d3SVYgODuluBuQYK7FysOBfJrzjTDcHe7+3Y3m8e755/te/femTNn5nzn+8597UOLW58WXz91AOoT0DMReACYspuH/gRYvpvH7LEUeB94Gni8mxxeHFgYmK6bxhs2TE9hgAE4DrgRmL+LTj8PrAfs14wB+By4qYsBWBeYrJkDcCUwVoNB+BHYvA5AfQJ6PgVGBGZu8JhWPWYZvAD4GjgBWKDBsZ8D9gEmArbv5jL4FjAkVQEn+KpBJ5v1sYndoDIAawGvNOuKOuj3XMCtQGUAFgKe7eBAzXrbgsAzbQVgL+CdZl1ZB/2eETipDMCEwAcwlBqPAfwMjBKff80GHgn4s52JunrdoYc3xsjAH53wYTTgb+D3bG1+nhYYVFLh2YDXgemDecnA1gHMm9OAOYGDgIuBvzInxgUOAXYCLol/f5Ndd56+QY89YbsCLxSLmA84HZgJ2B+4PBxPt00AHAFsA5wHHA58n40xQlw7GngV2C3w7GZARio1fw+YHXgjPTe8ABgQB9sBeCRyZxfgtZhAsbMtcBTwG3B+fB4bOBQ4N0rgGYALPCuCuEIE6oBw5Jhw/r4Ye2fgxQiUmOT8Ll5meFF8HhU4MDZDsWTw5gDODP2xdPjjdy64oQA4scJGbLghnFWRmUMKlI8il04Ejo/U8cjtGbvoKZgqUNfvEr6sCZwMTBJjfgnsAdwenz0FzmFV+hgwRV2A85iSpqniSL8s39OE8PKzu6x5ch3DnJeTHNvICZgbWC4mLdPO4HgUDYj4UdoUwLvAvrE75XUx5s74crXI0fIej7GLniECUV43j92gAcDZFT54Sh6MtPaUdjoFEgZUYc4qwF0BlG1hUhIz5mGVKZQ0BU+VuYvXAJ6qtkxA80Sl01Pe59wy0joA9QloIAWWAtbIgCUdL2uxR0qhsjJwb8X5XCa+Pyfusw7nlsDR7xLY5dfNX0HM0rpS5HI5jdhxB3BKgGLJDyznpsYTjaaACkzHncBSZU6vHgguPjwUzosFovibAVgqQKvEbcCSgNVAhL4FGD0CYvC8X5slVKPP/RLPuvjxo6/oQs3lxFQtz/okDhkAS95nUX1csA0YuYQ+GUirQENlcPJoaVlCBBtJkjsrEbIGW4Ls+UmSFg1U1ylruAj+VJQwa7hV47EgWYJaquEGIHEJS5yobl2/EDg4AGyJmMOqdDewanCSgfHXzXCDtgIeBmYNcDYIboTBaSgAqQpIbGR4ywKSGBdY2tZxj0TJkmTAcpNFmioSG1lhzuK8TzZ5BaBYMYgvF89L2gzqqdEbMECl2XeQTDmPQfXEdokJ5mXQaO8IePyqzJyWGP2LahY3ungdEj+qTJpt6TMIVWYQletTt8ELfObtOC2yTq0OQFe0QH0C4kh6lETdjUPMfFtxPgWqRyN/76m4bo7b47NfaCqVGGGOK6ak3gLrDxVjWIFEeSuLgFqamkHxJsO0YnRLChwWXH6xQH3LikpPHTAEUKYqTV2U7+/Mz7xKKFP7Rd4rob1fKZyqhE4uAqgY542S6TNWCYHXZyYFlLkCrTjje0fn1w9LrD0E+YJ+WEnscVqBnEOZ3rAcdsfHCVTdPVOGKjGFhQpR1BfRjbivwiROnhaVnovys8CZFKMiSSUof8+1gH06FaPOJqVn2XXHXcgXcV1usX6QJH1T/m4Q5dVSJ39QHVotJGmDQ080VAZ1UjIk2cjNHXBiX1up6V2w/YBkMkWbHhIbFZ/6/sNiDMup2l6zZN1fXFdlyiItiUlR5mxSLrF39AkkWCpCpXNupowkSB88QbUa7GxHqJbDWRUoEbcl+gGCiUKkylRw5p5VoVR63i8yC44i97VtjJG+36iN634vPVbcVHWC7SqJPYKiAFxl5v+njapBBYwAaAXwXZrmglVZgt+Y0ecTvUXxZJ4OUVhRYovdfqHorNLTlKlWAmmv5m8I8n6eilGAE/z8t6pRH1SdydbOen4/Rc/PMRMY+65THwRCdYNiqdMgqMLTaUWGJc2fvagMlanyg+uiFm8XBMcJRWPV2qWh5qwkR0YgVGfyeQMop7e8SYBSy91qIpFxDoOrGjSwqklPkkrQ6mMwJExWEWu/J0VO8F3IYP11bImXDdQn21OD7qhqT7Mba/NAJuYA1vItgc1igvFi0To2KNuNeWJH/WvtdoH5K7YUsE2D4SmGDFBigwZBKasYsrZfFQHOGacCyQAptl4KTuDfZLJAA71hBMINcpzLALvOts39uY2ETsGkDXZiG5LmWSta3xQApaPEpJVM4jUgBcAclD+3ktkqH1gHIDCg5U+AomOLVjr/8fa5vymg5FW/a5IO3/+39/69meOkSpWhJkLWr3w9PrymZTMvXt//03StA1BsaX0C0m9nssAoNBr9oWNvp4xaQE2R02V/yzDsvUNVCth78+1KMqWuVaIZrX/82Cv5vmI0WNsNQHtvbpoxCLnPNQiWr96qUqDMdzGg0d/79/aJ8eVojgH6Iy60mwI2JK7OPJcYlS3r3l5YR+dX4Up8km0SP6WrMSBFpEyB62O3fe30fzRf33kqfJM01Hrqf401TfDqADTNVvWQoy1/Av4Bh/d65bmC8OIAAAAASUVORK5CYII=">
+    <div class="title">{{channel.channelName}}</div>
+
+    <div class="timer">
+      <div *ngIf="showFullscreen" (click)="fullscreen()" class="timer__group timer__group--clickable">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAxklEQVRYR+3WMWoCQRSH8d+WOUDaXCBXSKNY2NvEQvACgqVFSg8g2AchRWxMbSF6Ehs9RNqQsMWyrDAjbLZ5083wf+99fAzMFDpeRcfzBUAYqBqYY/BPl/KA1e+sKsAGFxxbhujjCdMmgD22LQO8YhgAYSAMhIEwEAZuGThh1/JjNEKvCWCNcebwhzL/nVn3iVn9Oc7s8Rd/K4uW9xTnAjzjsTZoUu4/audXnFOgcj6lC7ykNMUX3lOyOQAp/bIzARAGOjfwA01yOCFMyvYoAAAAAElFTkSuQmCC">
+        <span class="timer__info" i18n>Vollbild</span>
+      </div>
+
+      <div class="timer__group">
+        <span class="timer__info" i18n>Aktualisierung</span>
+        <auto-refresh [refreshEveryMinutes]="2" (refresh)="refreshChannel()" (toggle)="toggleRefresh($event)"></auto-refresh>
+      </div>
+    </div>
   </div>
 
   <div class="container">
-  <div class="grid-row">
-    <ng-container *ngFor="let feed of channel.feeds">
-      <div *ngIf="getSettings(channel.channelId, feed.field.fieldId) as settings" class="grid-item">
-        <weight-view [feed]="feed" [settings]="settings" [locale]="getLocale()"></weight-view>
-      </div>
-    </ng-container>
-  </div>
+    <div class="grid-row">
+      <ng-container *ngFor="let feed of channel.feeds">
+        <div *ngIf="getSettings(channel.channelId, feed.field.fieldId) as settings" class="grid-item">
+          <weight-view [autoSwitch]="autoSwitch" [feed]="feed" [locale]="locale" [settings]="settings"></weight-view>
+        </div>
+      </ng-container>
+    </div>
   </div>
 </ng-container>
 
 <ng-template #loading>
-  <div class="loading">Loading...</div>
+  <div class="loading">
+    <div class="loading__icon">
+      <img src="data:image/png;base64,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">
+    </div>
+    <div class="loading__title" i18n>Daten werden geladen...</div>
+  </div>
 </ng-template>
-

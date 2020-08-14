@@ -128,7 +128,7 @@
     "no-string-literal": true,
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
-    "switch-default": true,
+    "switch-default": false,
     "no-trailing-whitespace": false,
     "no-unnecessary-initializer": true,
     "no-unused-expression": true,

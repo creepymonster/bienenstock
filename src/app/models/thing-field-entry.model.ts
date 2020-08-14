@@ -1,6 +1,7 @@
 export interface ThingFieldEntry {
   entryCreatedAt: Date;
   entryId: number;
-  entryValue: string;
+  entryNumberValue: number;
+  entryTextValue: string;
   fieldId: number;
 }

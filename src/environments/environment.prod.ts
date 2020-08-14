@@ -1,41 +1,41 @@
 import { Environment } from '@app/models/environment.model';
 
 export const environment: Environment = {
-  channelId: 1055033,
+  channelId: [1055033],
   locale: 'de-DE',
   production: true,
   tiles: [{
-    backgroundColor: '#F44336',
+    backgroundColor: '#1ABC9C',
     fieldId: 1,
     foregroundColor: 'white',
     tileType: 'weight',
     unit: 'kg'
   }, {
-    backgroundColor: '#009688',
+    backgroundColor: '#2ECC71',
     fieldId: 2,
     foregroundColor: 'white',
     tileType: 'weight',
     unit: 'kg'
   }, {
-    backgroundColor: '#9C27B0',
+    backgroundColor: '#3498DB',
     fieldId: 3,
     foregroundColor: 'white',
     tileType: 'weight',
     unit: 'kg'
   }, {
-    backgroundColor: '#FFC107',
+    backgroundColor: '#9B59B6',
     fieldId: 4,
     foregroundColor: 'white',
     tileType: 'weight',
     unit: 'kg'
   }, {
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#F1C40F',
     fieldId: 5,
     foregroundColor: 'white',
     tileType: 'weight',
     unit: 'kg'
   }, {
-    backgroundColor: '#4CAF50',
+    backgroundColor: '#E67E22',
     fieldId: 6,
     foregroundColor: 'white',
     tileType: 'weight',

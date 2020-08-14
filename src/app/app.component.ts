@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { ThingChannel, ThingFeeds, ThingField, ThingFieldEntry, TileSettings } from '@app/models';
@@ -14,14 +14,24 @@ import { ThingSpeakService } from './services';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  channel$: Observable<ThingChannel & ThingFeeds>;
-  channelIndex = 0;
-
-  constructor(@Inject(ENV) private env: Environment, private thingSpeakService: ThingSpeakService) {
+  get locale(): string {
+    return this.env.locale;
   }
 
-  getLocale(): string {
-    return this.env.locale;
+  get showFullscreen(): boolean {
+    return !(document.documentElement.clientWidth === screen.width && document.documentElement.clientHeight === screen.height);
+  }
+
+  autoSwitch = true;
+  channel$: Observable<ThingChannel & ThingFeeds>;
+  channelIndex = 0;
+  timeStamp = '';
+
+  constructor(@Inject(DOCUMENT) private document: any, @Inject(ENV) private env: Environment, private thingSpeakService: ThingSpeakService) {
+  }
+
+  fullscreen(): void {
+    this.document.documentElement.requestFullscreen();
   }
 
   getSettings(channelId: number, fieldId: number): TileSettings {
@@ -33,21 +43,17 @@ export class AppComponent implements OnInit {
   }
 
   refreshChannel(): void {
-    if (Array.isArray(this.env.channelId)) {
-      if (this.channelIndex < this.env.channelId.length) {
-        this.loadChannel(this.env.channelId[this.channelIndex]);
-        this.channelIndex += 1;
-      }
+    if (this.channelIndex < this.env.channelId.length) {
+      this.channel$ = this.thingSpeakService.getChannelFeeds(this.env.channelId[this.channelIndex]);
+      this.channelIndex += 1;
+    }
 
-      if (this.channelIndex >= this.env.channelId.length) {
-        this.channelIndex = 0;
-      }
-    } else {
-      this.loadChannel(this.env.channelId);
+    if (this.channelIndex >= this.env.channelId.length) {
+      this.channelIndex = 0;
     }
   }
 
-  private loadChannel(channelId: number) {
-    this.channel$ = this.thingSpeakService.getChannelFeeds(channelId);
+  toggleRefresh(state: boolean): void {
+    this.autoSwitch = state;
   }
 }

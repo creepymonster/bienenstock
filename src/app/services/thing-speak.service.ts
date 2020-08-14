@@ -14,7 +14,7 @@ export class ThingSpeakService {
   constructor(private http: HttpClient) { }
 
   getChannelFeeds(channelId: number): Observable<ThingChannel & ThingFeeds> { // https://api.thingspeak.com/channels/1055033/feed.json
-    const url = `${this.THINGSPEAK_API_SERVER}/channels/${channelId}/feed.json`;
+    const url = `${this.THINGSPEAK_API_SERVER}/channels/${channelId}/feed.json?${Math.random()}`;
 
     return this.http.get(url).pipe(
       map((res: any) => {
@@ -31,7 +31,7 @@ export class ThingSpeakService {
   }
 
   getFieldFeed(channelId: number, fieldId: number): Observable<ThingChannel & ThingFeeds> { // https://api.thingspeak.com/channels/1055033/field/1.json
-    const url = `${this.THINGSPEAK_API_SERVER}/channels/${channelId}/field/${fieldId}.json`;
+    const url = `${this.THINGSPEAK_API_SERVER}/channels/${channelId}/field/${fieldId}.json?${Math.random()}`;
 
     return this.http.get(url).pipe(
       map((res: any) => {
@@ -48,7 +48,7 @@ export class ThingSpeakService {
   }
 
   getLastEntryInChannelFeed(channelId: number): Observable<ThingFieldEntry[]> { // https://api.thingspeak.com/channels/1055033/feed/last.json
-    const url = `${this.THINGSPEAK_API_SERVER}/channels/${channelId}/feed/last.json`;
+    const url = `${this.THINGSPEAK_API_SERVER}/channels/${channelId}/feed/last.json?${Math.random()}`;
 
     return this.http.get(url).pipe(
       map((res: any) => this.mapFieldEntries(res))
@@ -56,7 +56,7 @@ export class ThingSpeakService {
   }
 
   getLastEntryInFieldFeed(channelId: number, fieldId: number): Observable<ThingFieldEntry> { // https://api.thingspeak.com/channels/1055033/field/1/last.json
-    const url = `${this.THINGSPEAK_API_SERVER}/channels/${channelId}/field/${fieldId}/last.json`;
+    const url = `${this.THINGSPEAK_API_SERVER}/channels/${channelId}/field/${fieldId}/last.json?${Math.random()}`;
 
     return this.http.get(url).pipe(
       map((res: any) => this.mapFieldEntry(res, fieldId))
@@ -136,7 +136,8 @@ export class ThingSpeakService {
       fieldId: fieldId,
       entryId: fieldRes.entry_id,
       entryCreatedAt: new Date(fieldRes.created_at),
-      entryValue: fieldRes[`field${fieldId}`]
+      entryTextValue: fieldRes[`field${fieldId}`],
+      entryNumberValue: Number(fieldRes[`field${fieldId}`])
     };
 
     return ret;

@@ -1,26 +1,73 @@
 <div [ngStyle]="{'background-color': settings.backgroundColor, color: settings.foregroundColor}" class="view">
-  <div class="view--title">{{ feed.field.fieldName }}</div>
+  <div class="view__header">
+    <div class="view__title">{{ feed.field.fieldName }}</div>
 
-  <div class="view__value">
-    <ng-container *ngIf="prevEntry">
-      <div class="view__value--prev">
-        <span i18n>Vorheriges Gewicht</span>
-        {{ formatValue(prevEntry.entryValue) }}
-      </div>
-    </ng-container>
-
-    <ng-container *ngIf="lastEntry">
-      <div class="view__value--last">
-        <span i18n>Aktuelles Gewicht</span>
-        {{ formatValue(lastEntry.entryValue) }}
-      </div>
-    </ng-container>
+    <div [ngClass]="{'view__toggle--summary': isViewSummary, 'view__toggle--chart': isViewChart}" (click)="switchView()" class="view__toggle"></div>
   </div>
 
-  <ng-container *ngIf="lastEntry">
-    <div class="view--created-at">
-      <span i18n>Stand</span>
-      {{ formatCreatedAt(lastEntry.entryCreatedAt) }}
+  <ng-container *ngIf="isViewSummary">
+    <div class="debug">
+      <div class="debug__field">
+        <div class="debug__desc">min</div>
+        <div class="debug__value">{{ min }}</div>
+      </div>
+
+      <div class="debug__field">
+        <div class="debug__desc">mean</div>
+        <div class="debug__value">{{ mean }}</div>
+      </div>
+
+      <div class="debug__field">
+        <div class="debug__desc">median</div>
+        <div class="debug__value">{{ median }}</div>
+      </div>
+
+      <div class="debug__field">
+        <div class="debug__desc">max</div>
+        <div class="debug__value">{{ max }}</div>
+      </div>
+
+      <div class="debug__field">
+        <div class="debug__desc">variance</div>
+        <div class="debug__value">{{ variance }}</div>
+      </div>
+
+      <div class="debug__field">
+        <div class="debug__desc">stddev</div>
+        <div class="debug__value">{{ stddev }}</div>
+      </div>
     </div>
+
+    <div class="view__value">
+      <ng-container *ngIf="prevEntry">
+        <div class="view__value--prev">
+          <span class="view__info" i18n>Vorheriges Gewicht</span>
+          {{ formatValue(prevEntry.entryNumberValue) }}
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="lastEntry">
+        <div class="view__value--last">
+          <span class="view__info" i18n>Gewicht</span>
+          <span class="view__value__direction">{{ direction }}</span>
+          {{ formatValue(lastEntry.entryNumberValue) }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ng-container *ngIf="lastEntry">
+      <div class="view__created-at">
+        <span class="view__info" i18n>Stand</span>
+        {{ formatDate(lastEntry.entryCreatedAt) }}
+      </div>
+    </ng-container>
+
+    <auto-refresh *ngIf="autoSwitch" [hidden]="true" [refreshEveryMinutes]="0.5" (Refresh)="switchView()"></auto-refresh>
+  </ng-container>
+
+  <ng-container *ngIf="isViewChart">
+    <apx-chart [chart]="chartOptions.chart" [colors]="chartOptions.colors" [dataLabels]="chartOptions.dataLabels" [fill]="chartOptions.fill" [grid]="chartOptions.grid" [legend]="chartOptions.legend" [markers]="chartOptions.markers" [series]="chartOptions.series" [stroke]="chartOptions.stroke" [theme]="chartOptions.theme" [title]="chartOptions.title" [tooltip]="chartOptions.tooltip" [xaxis]="chartOptions.xaxis" [yaxis]="chartOptions.yaxis"></apx-chart>
+
+    <auto-refresh *ngIf="autoSwitch" [hidden]="true" [refreshEveryMinutes]="0.5" (Refresh)="switchView()"></auto-refresh>
   </ng-container>
 </div>

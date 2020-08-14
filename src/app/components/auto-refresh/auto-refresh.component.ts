@@ -8,13 +8,18 @@ import { timer, Observable, Subscription } from 'rxjs';
   styleUrls: ['./auto-refresh.component.scss']
 })
 export class AutoRefreshComponent implements OnInit, OnDestroy {
+  get isActive(): boolean {
+    return !!this.subscription;
+  }
+
   countdown: string;
   everySecond: Observable<number> = timer(0, 1000);
-  @Output() Refresh: EventEmitter<any> = new EventEmitter<any>();
-  @Input() RefreshEveryMinutes = 3;
+  @Output() refresh: EventEmitter<any> = new EventEmitter<any>();
+  @Input() refreshEveryMinutes = 3;
   remainingTime: number;
   searchDate: moment.Moment = moment();
   searchEndDate: moment.Moment;
+  @Output() toggle: EventEmitter<boolean> = new EventEmitter<any>();
 
   private subscription: Subscription;
 
@@ -22,34 +27,48 @@ export class AutoRefreshComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   ngOnInit() {
-    this.searchEndDate = this.searchDate.add(this.RefreshEveryMinutes, 'minutes');
+    this.searchEndDate = this.searchDate.add(this.refreshEveryMinutes, 'minutes');
+    this.subscription = this.everySecond.subscribe(() => this.updateTimer());
+  }
 
-    this.subscription = this.everySecond.subscribe(() => {
-      const currentTime: moment.Moment = moment();
+  toggleTimer(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = undefined;
+      this.toggle.emit(false);
+    } else {
+      this.subscription = this.everySecond.subscribe(() => this.updateTimer());
+      this.toggle.emit(true);
+    }
+  }
 
-      this.remainingTime = this.searchEndDate.diff(currentTime)  / 1000;
+  updateTimer(): void {
+    const currentTime: moment.Moment = moment();
 
-      if (this.remainingTime <= 0) {
-        this.searchDate = moment();
-        this.searchEndDate = this.searchDate.add(this.RefreshEveryMinutes, 'minutes');
+    this.remainingTime = this.searchEndDate.diff(currentTime) / 1000;
 
-        this.Refresh.emit();
+    if (this.remainingTime <= 0) {
+      this.searchDate = moment();
+      this.searchEndDate = this.searchDate.add(this.refreshEveryMinutes, 'minutes');
+
+      this.refresh.emit();
+    } else {
+      const minutes = Math.floor(this.remainingTime / 60);
+      const seconds = Math.floor(this.remainingTime - minutes * 60);
+
+      if (seconds < 10) {
+        this.countdown = `${minutes}:0${seconds}`;
       } else {
-        const minutes = Math.floor(this.remainingTime / 60);
-        const seconds = Math.floor(this.remainingTime - minutes * 60);
-
-        if (seconds < 10) {
-          this.countdown = `${minutes}:0${seconds}`;
-        } else {
-          this.countdown = `${minutes}:${seconds}`;
-        }
+        this.countdown = `${minutes}:${seconds}`;
       }
+    }
 
-      this.ref.markForCheck();
-    });
+    this.ref.markForCheck();
   }
 }
