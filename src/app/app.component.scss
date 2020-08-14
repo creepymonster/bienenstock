@@ -3,6 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 
   box-sizing: border-box;
   max-width: 1024px;
@@ -11,6 +12,7 @@
   padding: 10px 10px 0;
 
   .logo {
+    display: block;
     flex: 0;
 
     opacity: 0.5;
@@ -120,8 +122,6 @@
 
 @media(max-width: 815px) {
   .header {
-    flex-direction: column;
-
     .timer__group,
     .title {
       margin-top: 10px;
@@ -134,10 +134,6 @@
 }
 
 @media(max-width: 555px) {
-  .header .timer {
-    flex-direction: column;
-  }
-
   .grid-item {
     flex-basis: 100%;
   }
