@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   }
 
   get showFullscreen(): boolean {
-    return !(document.documentElement.clientWidth === screen.width && document.documentElement.clientHeight === screen.height);
+    return this.document.documentElement.requestFullscreen && !(document.documentElement.clientWidth === screen.width && document.documentElement.clientHeight === screen.height);
   }
 
   autoSwitch = true;
