@@ -12,10 +12,13 @@
   padding: 10px 10px 0;
 
   .logo {
-    display: block;
     flex: 0;
 
     opacity: 0.5;
+    
+    img {
+      display: block;
+    }
   }
 
   .title {
@@ -34,7 +37,6 @@
     display: flex;
     flex: 0;
 
-    text-align: center;
     white-space: nowrap;
 
     opacity: 0.85;
@@ -134,8 +136,8 @@
 }
 
 @media(max-width: 555px) {
-  .title, .timer {
-    flex: 0 0 100%;
+  .header {
+    flex-direction: column;
   }
   
   .grid-item {
