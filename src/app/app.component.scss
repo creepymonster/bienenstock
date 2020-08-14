@@ -134,6 +134,10 @@
 }
 
 @media(max-width: 555px) {
+  .title, .timer {
+    flex: 0 0 100%;
+  }
+  
   .grid-item {
     flex-basis: 100%;
   }
