@@ -228,7 +228,7 @@ export class WeightViewComponent implements OnChanges {
                   show: true,
                   style: {
                     colors: 'rgba(255, 255, 255, 0.85)',
-                    fontSize: '12px'
+                    fontSize: '10px'
                   },
                   rotate: 0,
                   format: 'HH',
@@ -251,7 +251,7 @@ export class WeightViewComponent implements OnChanges {
                   align: 'left',
                   style: {
                     colors: 'rgba(255, 255, 255, 0.85)',
-                    fontSize: '12px'
+                    fontSize: '10px'
                   },
                   formatter: (value: number) => {
                     if (!value) {
