@@ -244,7 +244,7 @@ export class WeightViewComponent implements OnChanges {
                       return `${hoursValue}`;
                     }
 
-                    return;
+                    return '.';
                   }
                 },
                 axisBorder: {
