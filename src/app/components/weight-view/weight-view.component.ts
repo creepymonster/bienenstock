@@ -232,7 +232,7 @@ export class WeightViewComponent implements OnChanges {
                     fontSize: '12px'
                   },
                   rotate: 0,
-                  format: 'HH "h"'
+                  format: 'HH'
                 },
                 axisBorder: {
                   show: false
