@@ -127,9 +127,8 @@ export class WeightViewComponent implements OnChanges {
         switch (propName) {
           case 'feed': {
             const xAxis = {};
-          
-            this.values = this.feed.entries.map(x => x.entryNumberValue);
 
+            this.values = this.feed.entries.map(x => x.entryNumberValue);
             this.chartOptions = {
               chart: {
                 width: '100%',
@@ -233,17 +232,19 @@ export class WeightViewComponent implements OnChanges {
                     fontSize: '12px'
                   },
                   rotate: 0,
-                  formatter: (value: string, timestamp?: number) => {
+                  formatter: (value: string, timestamp?: number): string => {
                     if (!value) {
-                      return;
+                      return '';
                     }
 
-                    const dateValue = new Date(timestamp).getHours();
-                    
-                    if (dateValue % 2 === 0 && !xAxis.hasOwnProperty(dateValue)) {
-                      xAxis[dateValue] = dateValue;
-                      return `${dateValue.getHours()}`;
+                    const hoursValue = new Date(timestamp).getHours();
+                    if (hoursValue % 2 === 0) {
+                      xAxis[hoursValue] = true;
+                      
+                      return `${hoursValue}`;
                     }
+
+                    return '';
                   }
                 },
                 axisBorder: {
