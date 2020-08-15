@@ -192,7 +192,8 @@ export class WeightViewComponent implements OnChanges {
               stroke: {
                 curve: 'smooth',
                 colors: ['#fff', 'rgba(52, 73, 94, 0.85)'],
-                width: 3
+                width: 3,
+                dashArray: [0, 8]
               },
               tooltip: {
                 enabled: true,
