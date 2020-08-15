@@ -230,18 +230,7 @@ export class WeightViewComponent implements OnChanges {
                     fontSize: '12px'
                   },
                   rotate: 0,
-                  formatter: (value: string, timestamp?: number) => {
-                    if (!value) {
-                      return;
-                    }
-
-                    const hoursValue = new Date(timestamp).getHours();
-                    if (hoursValue % 2 === 0) {
-                      return `${hoursValue}`;
-                    }
-
-                    return;
-                  }
+                  format: 'HH'
                 },
                 axisBorder: {
                   show: false
