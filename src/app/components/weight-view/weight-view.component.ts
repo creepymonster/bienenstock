@@ -226,13 +226,15 @@ export class WeightViewComponent implements OnChanges {
                 type: 'datetime',
                 labels: {
                   show: true,
-                  datetimeUTC: true,
                   style: {
                     colors: 'rgba(255, 255, 255, 0.85)',
                     fontSize: '12px'
                   },
                   rotate: 0,
-                  format: 'HH'
+                  format: 'HH',
+                  formatter: (value, timestamp, index) => {
+            return new Date(timestamp)
+          }
                 },
                 axisBorder: {
                   show: false
