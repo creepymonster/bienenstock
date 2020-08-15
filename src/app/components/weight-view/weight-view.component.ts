@@ -230,12 +230,12 @@ export class WeightViewComponent implements OnChanges {
                     colors: 'rgba(255, 255, 255, 0.85)',
                     fontSize: '12px'
                   },
-                  formatter: (value: number) => {
+                  formatter: (value: string, timestamp?: number) => {
                     if (!value) {
                       return;
                     }
 
-                    const dateValue = new Date(value);
+                    const dateValue = new Date(timestamp);
                     return `${dateValue.toLocaleDateString(this.locale)}, ${dateValue.toLocaleTimeString(this.locale)}`;
                   }
                 },
