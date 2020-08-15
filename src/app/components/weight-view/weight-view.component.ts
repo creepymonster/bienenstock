@@ -236,7 +236,7 @@ export class WeightViewComponent implements OnChanges {
                     }
 
                     const dateValue = new Date(value);
-                    return `${dateValue.toLocaleTimeString(this.locale)}`;
+                    return `${dateValue.toLocaleDateString(this.locale)}, ${dateValue.toLocaleTimeString(this.locale)}`;
                   }
                 },
                 axisBorder: {
