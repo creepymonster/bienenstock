@@ -1,8 +1,12 @@
 export type TileType = 'weight' | 'temperature' | 'humidity';
 
+export interface ChannelSettings {
+  channelId: number;
+  tiles: TileSettings[];
+}
+
 export interface TileSettings {
   backgroundColor: string;
-  channelId?: number;
   fieldId: number;
   foregroundColor: string;
   tileType: TileType;
@@ -10,8 +14,7 @@ export interface TileSettings {
 }
 
 export interface Environment {
-  channelId: number[];
+  channels: ChannelSettings[];
   locale: string;
   production: boolean;
-  tiles: TileSettings[];
 }

@@ -19,7 +19,7 @@
   <div class="container">
     <div class="grid-row">
       <ng-container *ngFor="let feed of channel.feeds">
-        <div *ngIf="getSettings(channel.channelId, feed.field.fieldId) as settings" class="grid-item">
+        <div *ngIf="getSettings(feed.field.fieldId) as settings" class="grid-item">
           <weight-view [autoSwitch]="autoSwitch" [feed]="feed" [locale]="locale" [settings]="settings"></weight-view>
         </div>
       </ng-container>

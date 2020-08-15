@@ -34,8 +34,8 @@ export class AppComponent implements OnInit {
     this.document.documentElement.requestFullscreen();
   }
 
-  getSettings(channelId: number, fieldId: number): TileSettings {
-    return this.env.tiles.find(tile => (tile.channelId === channelId || !tile.channelId) && tile.fieldId === fieldId);
+  getSettings(fieldId: number): TileSettings {
+    return this.env.channels[this.channelIndex].tiles.find(tile => tile.fieldId === fieldId);
   }
 
   ngOnInit(): void {
@@ -43,12 +43,12 @@ export class AppComponent implements OnInit {
   }
 
   refreshChannel(): void {
-    if (this.channelIndex < this.env.channelId.length) {
-      this.channel$ = this.thingSpeakService.getChannelFeeds(this.env.channelId[this.channelIndex]);
+    if (this.channelIndex < this.env.channels.length) {
+      this.channel$ = this.thingSpeakService.getChannelFeeds(this.env.channels[this.channelIndex].channelId);
       this.channelIndex += 1;
     }
 
-    if (this.channelIndex >= this.env.channelId.length) {
+    if (this.channelIndex >= this.env.channels.length) {
       this.channelIndex = 0;
     }
   }

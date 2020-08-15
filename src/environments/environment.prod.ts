@@ -1,10 +1,9 @@
 import { Environment } from '@app/models/environment.model';
 
 export const environment: Environment = {
-  channelId: [1055033],
-  locale: 'de-DE',
-  production: true,
-  tiles: [{
+  channels: [{
+    channelId: 1055033,
+    tiles: [{
     backgroundColor: '#1ABC9C',
     fieldId: 1,
     foregroundColor: 'white',
@@ -41,4 +40,7 @@ export const environment: Environment = {
     tileType: 'weight',
     unit: 'kg'
   }]
+  }],
+  locale: 'de-DE',
+  production: true
 };
