@@ -239,7 +239,7 @@ export class WeightViewComponent implements OnChanges {
                     const dateValue = new Date(timestamp);
                     
                     if (dateValue.getHours() % 2 === 0) {
-                      return `${dateValue.toLocaleTimeString(this.locale, {hour: '2-digit'})}`;
+                      return `${dateValue.getHours()}`;
                     }
                   }
                 },
