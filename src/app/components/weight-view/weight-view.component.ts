@@ -229,6 +229,14 @@ export class WeightViewComponent implements OnChanges {
                   style: {
                     colors: 'rgba(255, 255, 255, 0.85)',
                     fontSize: '12px'
+                  },
+                  formatter: (value: number) => {
+                    if (!value) {
+                      return;
+                    }
+
+                    const dateValue = new Date(value);
+                    return `${dateValue.toLocaleTimeString(this.locale)}`;
                   }
                 },
                 axisBorder: {
