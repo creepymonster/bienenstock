@@ -238,13 +238,13 @@ export class WeightViewComponent implements OnChanges {
                     }
 
                     const hoursValue = new Date(timestamp).getHours();
-                    if (hoursValue % 2 === 0) {
+                    if (hoursValue % 2 === 0 && !xAxis.hasOwnProperty(hoursValue)) {
                       xAxis[hoursValue] = true;
                       
                       return `${hoursValue}`;
                     }
 
-                    return '';
+                    return '-';
                   }
                 },
                 axisBorder: {
