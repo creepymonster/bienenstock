@@ -231,7 +231,7 @@ export class WeightViewComponent implements OnChanges {
                     fontSize: '12px'
                   },
                   rotate: 0,
-                  format: 'HH'
+                  format: 'HH "h"'
                 },
                 axisBorder: {
                   show: false
