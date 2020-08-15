@@ -230,6 +230,7 @@ export class WeightViewComponent implements OnChanges {
                     colors: 'rgba(255, 255, 255, 0.85)',
                     fontSize: '12px'
                   },
+                  rotate: 0,
                   formatter: (value: string, timestamp?: number) => {
                     if (!value) {
                       return;
