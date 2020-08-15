@@ -1,43 +1,33 @@
 name: Deploy to GitHub Pages via angular-cli-ghpages
-
-on:
+'on':
   push:
     branches:
       - master
   watch:
-    types: [started]
-
+    types:
+      - started
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - run: echo ::set-env name=REPOSITORY_NAME::$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}' | sed -e "s/:refs//")
-      shell: bash
-
-    - run: echo "$REPOSITORY_NAME"
-      shell: bash
-    
-    - name: Checkout
-      uses: actions/checkout@v2
-      
-      - name: Cache multiple paths
-        uses: actions/cache@v2
+      - run: >-
+          echo ::set-env name=REPOSITORY_NAME::$(echo "$GITHUB_REPOSITORY" | awk
+          -F / '{print $2}' | sed -e "s/:refs//")
+        shell: bash
+      - run: echo "$REPOSITORY_NAME"
+        shell: bash
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Use Node.js 10.x
+        uses: actions/setup-node@v1
         with:
-          path: |
-      ~/cache
-      !~/cache/exclude
-      **/node_modules
-    key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}
+          node-version: 10.x
+      - name: Prepare and deploy
+        env:
+          GH_TOKEN: '${{ secrets.GH_TOKEN }}'
+        run: >
+          npm install
 
-    - name: Use Node.js 10.x
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10.x
+          npm run ng -- deploy --base-href=/$REPOSITORY_NAME/ --name="Reimar
+          Metzen" --email="reimarmetzen@gmail.com" --no-silent
 
-    - name: Prepare and deploy
-      env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: |
-        npm install
-        npm run ng -- deploy --base-href=/$REPOSITORY_NAME/ --name="Reimar Metzen" --email="reimarmetzen@gmail.com" --no-silent
