@@ -190,7 +190,7 @@ export class WeightViewComponent implements OnChanges {
                 })
               }],
               stroke: {
-                curve: 'straight',
+                curve: 'smooth',
                 colors: ['#fff', 'rgba(52, 73, 94, 0.85)'],
                 width: 3
               },
