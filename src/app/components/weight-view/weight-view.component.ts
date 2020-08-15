@@ -225,7 +225,11 @@ export class WeightViewComponent implements OnChanges {
               },
               xaxis: {
                 labels: {
-                  show: false
+                  show: true,
+                  style: {
+                    colors: 'rgba(255, 255, 255, 0.85)',
+                    fontSize: '12px'
+                  }
                 },
                 axisBorder: {
                   show: false
