@@ -223,6 +223,7 @@ export class WeightViewComponent implements OnChanges {
                 }
               },
               xaxis: {
+                type: 'datetime',
                 labels: {
                   show: true,
                   style: {
