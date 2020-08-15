@@ -232,9 +232,7 @@ export class WeightViewComponent implements OnChanges {
                   },
                   rotate: 0,
                   format: 'HH',
-                  formatter: (value, timestamp, index) => {
-            return new Date(timestamp)
-          }
+                  datetimeUTC: false
                 },
                 axisBorder: {
                   show: false
