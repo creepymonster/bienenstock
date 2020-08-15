@@ -232,9 +232,9 @@ export class WeightViewComponent implements OnChanges {
                     fontSize: '12px'
                   },
                   rotate: 0,
-                  formatter: (value: string, timestamp?: number): string => {
+                  formatter: (value: string, timestamp?: number) => {
                     if (!value) {
-                      return '';
+                      return;
                     }
 
                     const hoursValue = new Date(timestamp).getHours();
@@ -244,7 +244,7 @@ export class WeightViewComponent implements OnChanges {
                       return `${hoursValue}`;
                     }
 
-                    return '-';
+                    return;
                   }
                 },
                 axisBorder: {
