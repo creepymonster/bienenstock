@@ -1,6 +1,6 @@
 <div [ngStyle]="{'background-color': settings.backgroundColor, color: settings.foregroundColor}" class="view">
   <div class="view__header">
-    <div class="view__title">{{ feed.field.fieldName }} {{ autoSwitch }}</div>
+    <div class="view__title">{{ feed.field.fieldName }}</div>
 
     <div [ngClass]="{'view__toggle--summary': isViewSummary, 'view__toggle--chart': isViewChart}" (click)="switchView()" class="view__toggle"></div>
   </div>
@@ -62,12 +62,12 @@
       </div>
     </ng-container>
 
-    <auto-refresh *ngIf="autoSwitch" [hidden]="false" [refreshEveryMinutes]="0.5" (Refresh)="switchView()"></auto-refresh>
+    <auto-refresh *ngIf="autoSwitch" [hidden]="true" [refreshEveryMinutes]="0.5" (refresh)="switchView()"></auto-refresh>
   </ng-container>
 
   <ng-container *ngIf="isViewChart">
     <apx-chart [chart]="chartOptions.chart" [colors]="chartOptions.colors" [dataLabels]="chartOptions.dataLabels" [fill]="chartOptions.fill" [grid]="chartOptions.grid" [legend]="chartOptions.legend" [markers]="chartOptions.markers" [series]="chartOptions.series" [stroke]="chartOptions.stroke" [theme]="chartOptions.theme" [title]="chartOptions.title" [tooltip]="chartOptions.tooltip" [xaxis]="chartOptions.xaxis" [yaxis]="chartOptions.yaxis"></apx-chart>
 
-    <auto-refresh *ngIf="autoSwitch" [hidden]="false" [refreshEveryMinutes]="0.5" (Refresh)="switchView()"></auto-refresh>
+    <auto-refresh *ngIf="autoSwitch" [hidden]="true" [refreshEveryMinutes]="0.5" (refresh)="switchView()"></auto-refresh>
   </ng-container>
 </div>
