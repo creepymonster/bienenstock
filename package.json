@@ -4,7 +4,6 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build",
-    "deploy": "ng deploy --base-href=/bienenstock/",
     "e2e": "ng e2e",
     "lint": "ng lint",
     "start": "ng serve",
