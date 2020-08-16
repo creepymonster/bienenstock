@@ -28,6 +28,5 @@ jobs:
         run: >
           npm install
 
-          npm run ng -- deploy --base-href=/$REPOSITORY_NAME/ --name="Reimar
-          Metzen" --email="reimarmetzen@gmail.com" --no-silent
+          npm run ng -- deploy --base-href=/$REPOSITORY_NAME/ --name="${{ secrets.FULLNAME }}" --email="${{ secrets.EMAIL_ADDRESS }}" --no-silent
 
