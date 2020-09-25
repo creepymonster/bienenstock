@@ -59,6 +59,9 @@
     "no-unnecessary-else": true,
     "no-collapsible-if": true,
     "no-as-type-assertion": true,
+    "deprecation": {
+      "severity": "warning"
+    },
     "arrow-return-shorthand": true,
     "callable-types": true,
     "class-name": true,
