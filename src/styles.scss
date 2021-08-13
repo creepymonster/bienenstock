@@ -1,0 +1,29 @@
+body {
+  font-family: "Open Sans", sans-serif;
+
+  margin: 0;
+  padding: 0;
+}
+
+.apexcharts-tooltip.apexcharts-theme-light {
+  text-align: left !important;
+
+  color: #ecf0f1 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  background: rgba(52, 73, 94, 0.85) !important;
+
+  .apexcharts-tooltip-title {
+    margin: 0 !important;
+    padding: 5px 5px 0 !important;
+
+    border-bottom: none !important;
+    background: none !important;
+  }
+
+  .apexcharts-tooltip-series-group {
+    line-height: 1;
+
+    padding: 0 5px !important;
+  }
+}

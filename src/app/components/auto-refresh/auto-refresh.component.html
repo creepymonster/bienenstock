@@ -1,0 +1,9 @@
+<div (click)="toggleTimer()">
+  <ng-container *ngIf="isActive">
+    {{countdown}}
+  </ng-container>
+
+  <ng-container *ngIf="!isActive">
+    <span class="stopped" i18n>AUS</span>
+  </ng-container>
+</div>

@@ -1,0 +1,150 @@
+
+.header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  box-sizing: border-box;
+  max-width: 1024px;
+  min-height: 64px;
+  margin: 0 auto;
+  padding: 10px 10px 0;
+
+  .logo {
+    flex: 0;
+
+    opacity: 0.5;
+
+    img {
+      display: block;
+    }
+  }
+
+  .title {
+    font-size: 32px;
+    font-weight: 300;
+
+    flex: 1;
+
+    padding: 0 15px;
+  }
+
+  .timer {
+    font-size: 14px;
+    font-weight: 300;
+
+    display: flex;
+    flex: 0;
+
+    white-space: nowrap;
+
+    opacity: 0.85;
+
+    .timer__group {
+      display: flex;
+      align-items: center;
+
+      padding: 0 5px;
+    }
+
+    .timer__group--clickable {
+      cursor: pointer;
+    }
+
+    .timer__info {
+      padding: 0 10px;
+    }
+
+    auto-refresh {
+      font-weight: 700;
+    }
+  }
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.grid-row {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+
+  padding: 5px;
+}
+
+.grid-item {
+  position: relative;
+
+  flex-basis: 33.33%;
+
+  box-sizing: border-box;
+  width: 259px;
+  height: 258px;
+  padding: 5px;
+}
+
+@keyframes rotate_bee {
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  .loading__icon {
+    position: relative;
+
+    width: 100px;
+    height: 100px;
+
+    animation: rotate_bee 4s linear infinite;
+
+    img {
+      position: absolute;
+      bottom: -32px;
+      left: -32px;
+    }
+  }
+
+  .loading__title {
+    margin: 40px 0 0;
+  }
+}
+
+@media(max-width: 815px) {
+  .header {
+    .timer__group,
+    .title {
+      margin-top: 10px;
+    }
+
+    .title {
+      font-size: 24px;
+    }
+  }
+
+  .grid-item {
+    flex-basis: 50%;
+  }
+}
+
+@media(max-width: 555px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .grid-item {
+    flex-basis: 100%;
+  }
+}

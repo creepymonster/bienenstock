@@ -1,0 +1,157 @@
+:host {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
+
+.debug {
+  display: flex;
+  flex-wrap: wrap;
+
+  margin: 0 -5px;
+  padding: 5px 0 0;
+
+  .debug__field {
+    font-size: 14px;
+
+    display: flex;
+    flex: 0 0 calc(50% - 10px);
+
+    padding: 0 5px;
+
+    white-space: nowrap;
+
+    opacity: 0.85;
+
+    .debug__desc {
+      flex: 1;
+
+      text-align: left;
+    }
+
+    .debug__value {
+      flex: 0;
+    }
+  }
+}
+
+.view {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+
+  text-align: center;
+}
+
+.view__header,
+.view__value,
+.view__created-at {
+  width: 100%;
+
+  letter-spacing: 0.1em;
+
+  .view__info {
+    font-size: 14px;
+    font-weight: 300;
+
+    display: block;
+
+    opacity: 0.85;
+  }
+}
+
+.view__header {
+  font-size: 18px;
+  font-weight: 400;
+
+  display: flex;
+  align-items: center;
+
+  .view__title {
+    flex: 1;
+  }
+
+  .view__toggle {
+    position: relative;
+
+    width: 24px;
+    height: 12px;
+
+    cursor: pointer;
+
+    opacity: 0.75;
+    border: 2px solid #ffffff;
+    border-radius: 13px;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:before {
+      position: absolute;
+      top: 0;
+
+      width: 8px;
+      height: 8px;
+      margin: 2px;
+
+      content: "";
+      transition: left 150ms ease;
+
+      border-radius: 100%;
+      background-color: #ffffff;
+    }
+
+    &.view__toggle--summary:before {
+      left: 0;
+    }
+
+    &.view__toggle--chart:before {
+      left: calc(100% - 12px);
+    }
+  }
+}
+
+.view__value {
+  line-height: 1;
+
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+
+  .view__value__direction {
+    padding-right: 10px;
+  }
+
+  .view__value--prev {
+    font-size: 18px;
+    font-weight: 400;
+
+    display: none;
+
+    .view__info {
+      margin: 0 0 5px;
+    }
+  }
+
+  .view__value--last {
+    font-size: 32px;
+    font-weight: 700;
+
+    .view__info {
+      margin: 0 0 5px;
+    }
+  }
+}
+
+.view__created-at {
+  font-size: 14px;
+  font-weight: 300;
+}
